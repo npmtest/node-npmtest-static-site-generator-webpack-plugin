@@ -1,0 +1,908 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-static-site-generator-webpack-plugin/node_modules/static-site-generator-webpack-plugin/index.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-static-site-generator-webpack-plugin">npmtest-static-site-generator-webpack-plugin (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-static-site-generator-webpack-plugin/node_modules/static-site-generator-webpack-plugin/index.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">14.81% <small>(16 / 108)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 46)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 19)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">14.81% <small>(16 / 108)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; <a href="index.html">node-npmtest-static-site-generator-webpack-plugin/node_modules/static-site-generator-webpack-plugin/</a> &#187; index.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var RawSource = require('webpack-sources/lib/RawSource');
+var evaluate = require('eval');
+var path = require('path');
+var cheerio = require('cheerio');
+var url = require('url');
+var Promise = require('bluebird');
+&nbsp;
+<span class="fstat-no" title="function not covered" >function StaticSiteGeneratorWebpackPlugin(options) {</span>
+<span class="cstat-no" title="statement not covered" >  if (arguments.length &gt; 1) {</span>
+<span class="cstat-no" title="statement not covered" >    options = legacyArgsToOptions.apply(null, arguments);</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  options = options || {};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  this.entry = options.entry;</span>
+<span class="cstat-no" title="statement not covered" >  this.paths = Array.isArray(options.paths) ? options.paths : [options.paths || '/'];</span>
+<span class="cstat-no" title="statement not covered" >  this.locals = options.locals;</span>
+<span class="cstat-no" title="statement not covered" >  this.globals = options.globals;</span>
+<span class="cstat-no" title="statement not covered" >  this.crawl = Boolean(options.crawl);</span>
+}
+&nbsp;
+StaticSiteGeneratorWebpackPlugin.prototype.apply = <span class="fstat-no" title="function not covered" >function(compiler) {</span>
+<span class="cstat-no" title="statement not covered" >  var self = this;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  compiler.plugin('this-compilation', <span class="fstat-no" title="function not covered" >function(compilation) {</span></span>
+<span class="cstat-no" title="statement not covered" >    compilation.plugin('optimize-assets', <span class="fstat-no" title="function not covered" >function(_, done) {</span></span>
+<span class="cstat-no" title="statement not covered" >      var renderPromises;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var webpackStats = compilation.getStats();</span>
+<span class="cstat-no" title="statement not covered" >      var webpackStatsJson = webpackStats.toJson();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      try {</span>
+<span class="cstat-no" title="statement not covered" >        var asset = findAsset(self.entry, compilation, webpackStatsJson);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (asset == null) {</span>
+<span class="cstat-no" title="statement not covered" >          throw new Error('Source file not found: "' + self.entry + '"');</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var assets = getAssetsFromCompilation(compilation, webpackStatsJson);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var source = asset.source();</span>
+<span class="cstat-no" title="statement not covered" >        var render = evaluate(source, /* filename: */ self.entry, /* scope: */ self.globals, /* includeGlobals: */ true);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (render.hasOwnProperty('default')) {</span>
+<span class="cstat-no" title="statement not covered" >          render = render['default'];</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (typeof render !== 'function') {</span>
+<span class="cstat-no" title="statement not covered" >          throw new Error('Export from "' + self.entry + '" must be a function that returns an HTML string. Is output.libraryTarget in the configuration set to "umd"?');</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        renderPaths(self.crawl, self.locals, self.paths, render, assets, webpackStats, compilation)</span>
+          .nodeify(done);
+      } catch (err) {
+<span class="cstat-no" title="statement not covered" >        compilation.errors.push(err.stack);</span>
+<span class="cstat-no" title="statement not covered" >        done();</span>
+      }
+    });
+  });
+};
+&nbsp;
+<span class="fstat-no" title="function not covered" >function renderPaths(crawl, userLocals, paths, render, assets, webpackStats, compilation) {</span>
+<span class="cstat-no" title="statement not covered" >  var renderPromises = paths.map(<span class="fstat-no" title="function not covered" >function(outputPath) {</span></span>
+<span class="cstat-no" title="statement not covered" >    var locals = {</span>
+      path: outputPath,
+      assets: assets,
+      webpackStats: webpackStats
+    };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    for (var prop in userLocals) {</span>
+<span class="cstat-no" title="statement not covered" >      if (userLocals.hasOwnProperty(prop)) {</span>
+<span class="cstat-no" title="statement not covered" >        locals[prop] = userLocals[prop];</span>
+      }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var renderPromise = render.length &lt; 2 ?</span>
+      Promise.resolve(render(locals)) :
+      Promise.fromNode(render.bind(null, locals));
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return renderPromise</span>
+      .then(<span class="fstat-no" title="function not covered" >function(output) {</span>
+<span class="cstat-no" title="statement not covered" >        var outputByPath = typeof output === 'object' ? output : makeObject(outputPath, output);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var assetGenerationPromises = Object.keys(outputByPath).map(<span class="fstat-no" title="function not covered" >function(key) {</span></span>
+<span class="cstat-no" title="statement not covered" >          var rawSource = outputByPath[key];</span>
+<span class="cstat-no" title="statement not covered" >          var assetName = pathToAssetName(key);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          if (compilation.assets[assetName]) {</span>
+<span class="cstat-no" title="statement not covered" >            return;</span>
+          }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          compilation.assets[assetName] = new RawSource(rawSource);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >          if (crawl) {</span>
+<span class="cstat-no" title="statement not covered" >            var relativePaths = relativePathsFromHtml({</span>
+              source: rawSource,
+              path: key
+            });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return renderPaths(crawl, userLocals, relativePaths, render, assets, webpackStats, compilation);</span>
+          }
+        });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return Promise.all(assetGenerationPromises);</span>
+      })
+      .catch(<span class="fstat-no" title="function not covered" >function(err) {</span>
+<span class="cstat-no" title="statement not covered" >        compilation.errors.push(err.stack);</span>
+      });
+  });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return Promise.all(renderPromises);</span>
+}
+&nbsp;
+var findAsset = <span class="fstat-no" title="function not covered" >function(src, compilation, webpackStatsJson) {</span>
+<span class="cstat-no" title="statement not covered" >  if (!src) {</span>
+<span class="cstat-no" title="statement not covered" >    var chunkNames = Object.keys(webpackStatsJson.assetsByChunkName);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    src = chunkNames[0];</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  var asset = compilation.assets[src];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (asset) {</span>
+<span class="cstat-no" title="statement not covered" >    return asset;</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  var chunkValue = webpackStatsJson.assetsByChunkName[src];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (!chunkValue) {</span>
+<span class="cstat-no" title="statement not covered" >    return null;</span>
+  }
+  // Webpack outputs an array for each chunk when using sourcemaps
+<span class="cstat-no" title="statement not covered" >  if (chunkValue instanceof Array) {</span>
+    // Is the main bundle always the first element?
+<span class="cstat-no" title="statement not covered" >    chunkValue = chunkValue[0];</span>
+  }
+<span class="cstat-no" title="statement not covered" >  return compilation.assets[chunkValue];</span>
+};
+&nbsp;
+// Shamelessly stolen from html-webpack-plugin - Thanks @ampedandwired :)
+var getAssetsFromCompilation = <span class="fstat-no" title="function not covered" >function(compilation, webpackStatsJson) {</span>
+<span class="cstat-no" title="statement not covered" >  var assets = {};</span>
+<span class="cstat-no" title="statement not covered" >  for (var chunk in webpackStatsJson.assetsByChunkName) {</span>
+<span class="cstat-no" title="statement not covered" >    var chunkValue = webpackStatsJson.assetsByChunkName[chunk];</span>
+&nbsp;
+    // Webpack outputs an array for each chunk when using sourcemaps
+<span class="cstat-no" title="statement not covered" >    if (chunkValue instanceof Array) {</span>
+      // Is the main bundle always the first element?
+<span class="cstat-no" title="statement not covered" >      chunkValue = chunkValue[0];</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (compilation.options.output.publicPath) {</span>
+<span class="cstat-no" title="statement not covered" >      chunkValue = compilation.options.output.publicPath + chunkValue;</span>
+    }
+<span class="cstat-no" title="statement not covered" >    assets[chunk] = chunkValue;</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return assets;</span>
+};
+&nbsp;
+<span class="fstat-no" title="function not covered" >function pathToAssetName(outputPath) {</span>
+<span class="cstat-no" title="statement not covered" >  var outputFileName = outputPath.replace(/^(\/|\\)/, ''); </span>// Remove leading slashes for webpack-dev-server
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  if (!/\.(html?)$/i.test(outputFileName)) {</span>
+<span class="cstat-no" title="statement not covered" >    outputFileName = path.join(outputFileName, 'index.html');</span>
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return outputFileName;</span>
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function makeObject(key, value) {</span>
+<span class="cstat-no" title="statement not covered" >  var obj = {};</span>
+<span class="cstat-no" title="statement not covered" >  obj[key] = value;</span>
+<span class="cstat-no" title="statement not covered" >  return obj;</span>
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function relativePathsFromHtml(options) {</span>
+<span class="cstat-no" title="statement not covered" >  var html = options.source;</span>
+<span class="cstat-no" title="statement not covered" >  var currentPath = options.path;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  var $ = cheerio.load(html);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  var linkHrefs = $('a[href]')</span>
+    .map(<span class="fstat-no" title="function not covered" >function(i, el) {</span>
+<span class="cstat-no" title="statement not covered" >      return $(el).attr('href');</span>
+    })
+    .get();
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  var iframeSrcs = $('iframe[src]')</span>
+    .map(<span class="fstat-no" title="function not covered" >function(i, el) {</span>
+<span class="cstat-no" title="statement not covered" >      return $(el).attr('src');</span>
+    })
+    .get();
+&nbsp;
+<span class="cstat-no" title="statement not covered" >  return []</span>
+    .concat(linkHrefs)
+    .concat(iframeSrcs)
+    .map(<span class="fstat-no" title="function not covered" >function(href) {</span>
+<span class="cstat-no" title="statement not covered" >      if (href.indexOf('//') === 0) {</span>
+<span class="cstat-no" title="statement not covered" >        return null</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      var parsed = url.parse(href);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      if (parsed.protocol || typeof parsed.path !== 'string') {</span>
+<span class="cstat-no" title="statement not covered" >        return null;</span>
+      }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >      return parsed.path.indexOf('/') === 0 ?</span>
+        parsed.path :
+        url.resolve(currentPath, parsed.path);
+    })
+    .filter(<span class="fstat-no" title="function not covered" >function(href) {</span>
+<span class="cstat-no" title="statement not covered" >      return href != null;</span>
+    });
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function legacyArgsToOptions(entry, paths, locals, globals) {</span>
+<span class="cstat-no" title="statement not covered" >  return {</span>
+    entry: entry,
+    paths: paths,
+    locals: locals,
+    globals: globals
+  };
+}
+&nbsp;
+module.exports = StaticSiteGeneratorWebpackPlugin;
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Thu Apr 20 2017 11:12:47 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
